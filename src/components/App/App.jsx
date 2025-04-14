@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import Footer from '../Footer/Footer';
 import NewTaskForm from '../New-Task-Form/New-Task-Form';
 import TaskList from '../Task-List/Task-List';
@@ -8,30 +8,158 @@ import './App.css'
 
 
 
-const App = () => {
-    const Tasks = [
+export default class App extends Component {
+
+  idItem = 10;
+   
+
+  state  = {
+         Data:[
+          this.craeteDataItem('text')
+        ],
+         filterKey: [{id: 1, type: "All", selected: true},
+                      {id: 2,type: "Active", selected: false},
+                      {id: 3,type: "Completed", selected: false},
+         ]
+         };
+
+
+  
+craeteDataItem(label){
+        return {
+            id: this.idItem ++,  
+            description : label,
+            created: new Date(), 
+            done: false,
+            edit: ""
+        };
+      };
+      
+
+addDataItem = (text) => {
+
+       const newDataItem =  this.craeteDataItem(text);
+         this.setState(({Data}) =>  {
+          const newData = [...Data,newDataItem];
+
+       return {
+        Data : newData
+       
+           };
+        });
+      };
+
+
+
+onFillterChainge = (select)  => {
+    this.setState (({filterKey}) => {
+    const olditemFilterKey= this.state.filterKey.filter((el) => el.id >= 0)
+    let idx = olditemFilterKey.findIndex((el) => el.selected === true)
+    olditemFilterKey[idx].selected = false;
+    idx = olditemFilterKey.findIndex((el) => el.type === select)
+    olditemFilterKey[idx].selected = true;
     
-        {id: 1, mode : "completed", description : "Completed task",created: "2024-01-01"},
-        {id: 2, mode : "editing", description : "Editing task",created: "2023-02-01" },
-        {id: 3, mode : "", description : "Active task",created: "2025-03-01"},
-        
-        ];
+    return {
+        filterKey : olditemFilterKey
+    };
+    });
+    };
+   
+
+onDestroy = (id) => { 
+   this.setState (({Data}) => {
+    const idx = Data.findIndex((el) => el.id === id) 
+    const newArrayData = [
+    ...Data.slice(0,idx),
+    ...Data.slice(idx + 1)
+      ]
+   
+return {
+    Data : newArrayData
+};
+});
+};
+
+
+onDoneClick = (id) => {
+    this.setState (({Data}) => {
+        const idx = Data.findIndex((el) => el.id === id) ;
+  const oldIdData = Data[idx];
+  const newIdData = {...oldIdData,done : ! oldIdData.done}
+  const newArrayData = [
+    ...Data.slice(0,idx),
+    newIdData,
+    ...Data.slice(idx + 1)
+      ];
+       
+      return {
+        Data : newArrayData
+      };
+    });
+   };
 
 
 
+onClear =() => {
+
+   this.setState (({Data}) => {
+
+        return{
+            Data : []
+        }
+    })
+
+     };
+
+
+
+filterArray = (Data) => {
+     const id = this.state.filterKey.findIndex((el) => el.selected)
+     const filterKeySelect = this.state.filterKey[id].type
+     let dataFilter;
+
+  if (filterKeySelect === "All") {  
+    dataFilter = Data ;
+ } 
+ if (filterKeySelect === "Active") {
+    dataFilter = Data.filter((el) => el.done === false) ;
+    
+ } 
+  if (filterKeySelect === "Completed"){
+    dataFilter = Data.filter((el) => el.done);
+ };
+
+   return dataFilter ;
+}
+
+
+
+render() {
+  const  {filterKey} = this.state; 
+  const {Data} = this.state;
+  const countDoItem = this.state.Data.filter((el) => el.done).length;
+  const toDoCounts = this.state.Data.length  - countDoItem;
+  let dataFilter = this.filterArray(Data);
+ 
 return(
 <div>
 <section class="todoapp"> 
-<NewTaskForm/>
+<NewTaskForm  addDataItem = {(text) => this.addDataItem(text)}  />
 <section class="main">
-<TaskList Tasks = {Tasks}/>
-<Footer/>
+<TaskList Tasks = {dataFilter}
+onDestroy = {(id) => this.onDestroy(id)}
+onDoneClick = {(id) => this.onDoneClick(id)}
+/>
+<Footer toDoCounts = {toDoCounts}
+onSelectFilter = {(select) => this.onFillterChainge(select)} 
+filterKey = {filterKey}
+onClear = {() => this.onClear()} />
 </section>
 </section>
 </div>
 );
 };
- export default App ;
+};
 
 
 

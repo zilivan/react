@@ -1,21 +1,43 @@
 import React from 'react';
+import ButtonFilter from '../Button-Filter/Button-Filter';
+import PropTypes from 'prop-types';
 import './Tasks-Filter.css'
-const TasksFilter = () => {
+
+
+ const TasksFilter =    ({onSelectFilter, filterKey})     =>   {
+    
+  TasksFilter.defaultProps = {
+    filterKey: []
+      };
+
+  TasksFilter.propTypes ={
+    filterKey:PropTypes.arrayOf(PropTypes.object)
+  
+       }
+
+
+
+   const TaskFill = filterKey.map((item)  => {
+
+    return(
+
+    <ButtonFilter 
+    
+    {...item} 
+    onSelectFilter = {(select) =>  onSelectFilter(select)}/>
+     );
+     
+      })
+
+
     return(
       
         <ul className="filters">
-          <li>
-            <button className="selected">All</button>
-          </li>
-          <li>
-            <button>Active</button>
-          </li>
-          <li>
-            <button>Completed</button>
-          </li>
+         {TaskFill}
         </ul>
        
 
     );
 };
- export default TasksFilter ;
+export default TasksFilter ;
+
