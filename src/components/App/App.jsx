@@ -113,20 +113,20 @@ onClear =() => {
 
 
 
-filterArray = (Data) => {
+filterArray = () => {
      const id = this.state.filterKey.findIndex((el) => el.selected)
      const filterKeySelect = this.state.filterKey[id].type
      let dataFilter;
 
   if (filterKeySelect === "All") {  
-    dataFilter = Data ;
+    dataFilter = this.state.Data ;
  } 
  if (filterKeySelect === "Active") {
-    dataFilter = Data.filter((el) => el.done === false) ;
+    dataFilter = this.state.Data.filter((el) => el.done === false) ;
     
  } 
   if (filterKeySelect === "Completed"){
-    dataFilter = Data.filter((el) => el.done);
+    dataFilter = this.state.Data.filter((el) => el.done);
  };
 
    return dataFilter ;
@@ -136,10 +136,9 @@ filterArray = (Data) => {
 
 render() {
   const  {filterKey} = this.state; 
-  const {Data} = this.state;
   const countDoItem = this.state.Data.filter((el) => el.done).length;
   const toDoCounts = this.state.Data.length  - countDoItem;
-  let dataFilter = this.filterArray(Data);
+  let dataFilter = this.filterArray();
  
 return(
 <div>
