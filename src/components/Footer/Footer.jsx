@@ -14,7 +14,7 @@ const Footer = ({toDoCounts , onSelectFilter, filterKey, onClear }) => {
     onClear:PropTypes.func,
     toDoCounts: PropTypes.number
        }
-  
+      
 
     return(
         <footer className="footer">
