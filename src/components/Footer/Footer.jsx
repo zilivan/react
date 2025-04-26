@@ -1,31 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import TasksFilter from '../Tasks-Filter/Tasks-Filter';
-import PropTypes from 'prop-types'
-import './Footer.css'
+import './Footer.css';
 
-const Footer = ({toDoCounts , onSelectFilter, filterKey, onClear }) => {
-
+const Footer = ({ toDoCounts, onSelectFilter, filterKey, onClear }) => {
   Footer.defaultProps = {
-    onClear:() => {},
-    toDoCounts: 0
-      };
+    onClear: () => {},
+    onSelectFilter: () => {},
+    filterKey: [],
+    toDoCounts: 0,
+  };
 
-  Footer.propTypes ={
-    onClear:PropTypes.func,
-    toDoCounts: PropTypes.number
-       }
-      
-
-    return(
-        <footer className="footer">
-        <span className="todo-count">{toDoCounts} items left</span>
-        <TasksFilter 
-        onSelectFilter = { (select) => onSelectFilter(select)}
-        filterKey = {filterKey}
-        />
-        <button className="clear-completed" onClick = {onClear}>Clear completed</button>
-      </footer>
-
-    );
+  Footer.propTypes = {
+    onClear: PropTypes.func,
+    onSelectFilter: PropTypes.func,
+    filterKey: PropTypes.arrayOf(PropTypes.object),
+    toDoCounts: PropTypes.number,
+  };
+  return (
+    <footer className="footer">
+      <span className="todo-count">{toDoCounts} items left</span>
+      <TasksFilter onSelectFilter={(select) => onSelectFilter(select)} filterKey={filterKey} />
+      <button className="clear-completed" onClick={onClear}>
+        Clear completed
+      </button>
+    </footer>
+  );
 };
- export default Footer ;
+export default Footer;

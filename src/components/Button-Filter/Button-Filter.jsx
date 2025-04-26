@@ -1,35 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
-const ButtonFilter = ({onSelectFilter,id, type, selected}) => {
-
-ButtonFilter.defaultProps = {
-         onSelectFilter:() => {},
-      };
- ButtonFilter.propTypes = {
-         onSelectFilter:PropTypes.func,
-        type: PropTypes.string.isRequired,
-         id: PropTypes.number.isRequired,
-       selected:PropTypes.bool.isRequired
-       }
-
-
+const ButtonFilter = ({ onSelectFilter, type, selected }) => {
+  ButtonFilter.defaultProps = {
+    onSelectFilter: () => {},
+  };
+  ButtonFilter.propTypes = {
+    onSelectFilter: PropTypes.func,
+    type: PropTypes.string.isRequired,
+    selected: PropTypes.bool.isRequired,
+  };
 
   const onSelect = (e) => {
-    const select = e.target.innerHTML
-              onSelectFilter(select);
-      
-     }
+    const select = e.target.innerHTML;
+    onSelectFilter(select);
+  };
+  let clas = '';
 
-   let clas = "";
+  if (selected) {
+    clas = 'selected';
+  }
 
-   if (selected) {clas = "selected"}
-
-    return(
-      <li  key = {id}>
-      <button class = { clas } onClick = {onSelect}>{type}</button>
-    </li>
-
-    );
+  return (
+    <button className={clas} onClick={onSelect}>
+      {type}
+    </button>
+  );
 };
- export default ButtonFilter ;
+export default ButtonFilter;

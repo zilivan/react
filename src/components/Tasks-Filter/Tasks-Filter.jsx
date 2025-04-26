@@ -1,43 +1,26 @@
 import React from 'react';
-import ButtonFilter from '../Button-Filter/Button-Filter';
 import PropTypes from 'prop-types';
-import './Tasks-Filter.css'
 
+import ButtonFilter from '../Button-Filter/Button-Filter';
+import './Tasks-Filter.css';
 
- const TasksFilter =    ({onSelectFilter, filterKey})     =>   {
-    
+const TasksFilter = ({ onSelectFilter, filterKey }) => {
   TasksFilter.defaultProps = {
-    filterKey: []
-      };
+    filterKey: [],
+  };
 
-  TasksFilter.propTypes ={
-    filterKey:PropTypes.arrayOf(PropTypes.object)
-  
-       }
+  TasksFilter.propTypes = {
+    filterKey: PropTypes.arrayOf(PropTypes.object),
+  };
 
-
-
-   const TaskFill = filterKey.map((item)  => {
-
-    return(
-
-    <ButtonFilter 
-    
-    {...item} 
-    onSelectFilter = {(select) =>  onSelectFilter(select)}/>
-     );
-     
-      })
-
-
-    return(
-      
-        <ul className="filters">
-         {TaskFill}
-        </ul>
-       
-
+  const TaskFill = filterKey.map((item) => {
+    return (
+      <li key={item.id}>
+        <ButtonFilter {...item} onSelectFilter={(select) => onSelectFilter(select)} />
+      </li>
     );
-};
-export default TasksFilter ;
+  });
 
+  return <ul className="filters">{TaskFill}</ul>;
+};
+export default TasksFilter;
