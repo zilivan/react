@@ -40,6 +40,14 @@
     "lint": "eslint \"src/**/*.{js,jsx}\"",
     "lint:fix": "eslint  \"src/**/*.{js,jsx}\" --fix"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js|jsx)": ["npm run lint:fix", "git add"]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
