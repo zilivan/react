@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://zilivan.github.io/react/",
   "dependencies": {
+    "@babel/eslint-parser": "^7.27.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -71,7 +72,11 @@
     ]
   },
   "main": "prettier.config.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@babel/preset-env": "7.5.5",
+    "@babel/preset-react": "7.27.1"
+  },
   "author": "",
   "license": "ISC",
   "description": ""
