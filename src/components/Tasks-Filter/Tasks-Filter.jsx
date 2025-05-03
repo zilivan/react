@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ButtonFilter from '../Button-Filter/Button-Filter';
+import ButtonFilter from '../Button-Filter/Button-Filter.jsx';
 import './Tasks-Filter.css';
 
 const TasksFilter = ({ onSelectFilter, filterKey }) => {

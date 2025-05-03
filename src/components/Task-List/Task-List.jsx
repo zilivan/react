@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Task from '../Task/Task';
-import EditTaskForm from '../Edit-Task-Form/Edit-Task-Form';
+import Task from '../Task/Task.jsx';
+import EditTaskForm from '../Edit-Task-Form/Edit-Task-Form.jsx';
 
 import './Task-List.css';
 

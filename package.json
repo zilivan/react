@@ -2,7 +2,10 @@
   "name": "todos",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zilivan.github.io/react/",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -77,8 +80,7 @@
     "@babel/core": "7.16.0",
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.27.1"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
+  
 }
+                                                      
